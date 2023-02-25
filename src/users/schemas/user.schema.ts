@@ -5,16 +5,22 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   mail: string;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
-  @Prop()
+  @Prop({ default: false, required: true })
+  confirmed: Boolean;
+
+  @Prop({ default: Date.now, required: true })
+  createdAt: Date;
+
+  @Prop({ enum: ['teacher', 'student', 'admin'], default: 'student', required: true })
   role: 'teacher' | 'student' | 'admin';
 }
 
