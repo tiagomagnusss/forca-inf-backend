@@ -5,6 +5,10 @@ import { SubjectsModule } from './subjects/subjects.module';
 import { UsersModule } from './users/users.module';
 import { TeachersModule } from './teachers/teachers.module';
 import { AssessmentsModule } from './assessments/assessments.module';
+import { AuthModule } from './auth/auth.module';
+
+import { AppController } from './app.controller';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -19,6 +23,8 @@ import { AssessmentsModule } from './assessments/assessments.module';
     UsersModule,
     TeachersModule,
     AssessmentsModule,
+    AuthModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
