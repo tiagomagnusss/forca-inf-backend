@@ -27,16 +27,16 @@ export class TeachersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.teachersService.findOne(+id);
+    return this.teachersService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTeacherDto: UpdateTeacherDto) {
-    return this.teachersService.update(+id, updateTeacherDto);
+    return this.teachersService.update(id, updateTeacherDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.teachersService.remove(+id);
+    return this.teachersService.delete(id);
   }
 }
