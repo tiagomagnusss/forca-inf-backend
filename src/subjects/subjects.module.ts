@@ -3,6 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SubjectsService } from './subjects.service';
 import { SubjectsController } from './subjects.controller';
 import { Subject, SubjectSchema } from './schemas/subject.schema';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/roles/roles.guard';
 
 @Module({
   imports: [
