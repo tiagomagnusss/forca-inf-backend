@@ -1,5 +1,21 @@
+import { IsDate, IsNotEmpty } from 'class-validator';
+
 export class CreateAssessmentDto {
-  readonly name: string;
-  readonly age: number;
-  readonly breed: string;
+  title: string;
+
+  comment: string;
+
+  semester: string;
+
+  owner: string;
+
+  subject: string;
+
+  teacher: string;
+
+  @IsDate()
+  createdAt: Date;
+
+  @IsNotEmpty()
+  grade: 'A' | 'B' | 'C' | 'D' | 'FF';
 }
