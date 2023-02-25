@@ -21,7 +21,7 @@ export class AssessmentsService {
   }
 
   async findOne(id: string): Promise<Assessment> {
-    return this.assessmentModel.findOne({ _id: id }).exec();
+    return this.assessmentModel.findOne({ _id: id }).lean().exec();
   }
 
   async delete(id: string) {

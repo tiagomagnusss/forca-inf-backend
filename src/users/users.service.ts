@@ -22,7 +22,11 @@ export class UsersService {
   }
 
   async findOne(id: string): Promise<User> {
-    return this.userModel.findOne({ _id: id }).exec();
+    return this.userModel.findOne({ _id: id }).lean().exec();
+  }
+
+  async findOneByMail(mail: string): Promise<User> {
+    return this.userModel.findOne({ mail: mail }).lean().exec();
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

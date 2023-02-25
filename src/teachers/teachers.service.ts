@@ -22,7 +22,7 @@ export class TeachersService {
   }
 
   async findOne(id: string): Promise<Teacher> {
-    return this.teacherModel.findOne({ _id: id }).exec();
+    return this.teacherModel.findOne({ _id: id }).lean().exec();
   }
 
   async update(id: string, updateTeacherDto: UpdateTeacherDto) {

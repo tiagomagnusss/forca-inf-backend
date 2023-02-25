@@ -22,7 +22,7 @@ export class SubjectsService {
   }
 
   async findOne(id: string): Promise<Subject> {
-    return this.subjectModel.findOne({ _id: id }).exec();
+    return this.subjectModel.findOne({ _id: id }).lean().exec();
   }
 
   async update(id: string, updateSubjectDto: UpdateSubjectDto) {
