@@ -15,19 +15,22 @@ export class Assessment {
   comment: string;
 
   @Prop()
+  semester: string;
+
+  @Prop()
   owner: User;
 
   @Prop()
   subject: Subject;
 
   @Prop()
-  semester: string;
-
-  @Prop()
   teacher: Teacher;
 
-  @Prop()
-  grade: 'A' | 'B' | 'C' | 'D' | 'FF';
+  @Prop({ default: Date.now, required: true })
+  createdAt: Date;
+
+  @Prop({ enum: ['A', 'B', 'C', 'D', 'FF'], required: true })
+  grade!: 'A' | 'B' | 'C' | 'D' | 'FF';
 }
 
 export const AssessmentSchema = SchemaFactory.createForClass(Assessment);

@@ -6,7 +6,11 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { RolesGuard } from 'src/roles/roles.guard';
+import { Role } from 'src/roles/role.enum';
+import { Roles } from 'src/roles/roles.decorator';
 import { SubjectsService } from './subjects.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
@@ -15,6 +19,8 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
+  @UseGuards(RolesGuard)
+  @Roles(Role.Admin)
   @Post()
   create(@Body() createSubjectDto: CreateSubjectDto) {
     return this.subjectsService.create(createSubjectDto);
@@ -27,16 +33,20 @@ export class SubjectsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.subjectsService.findOne(+id);
+    return this.subjectsService.findOne(id);
   }
 
+  @UseGuards(RolesGuard)
+  @Roles(Role.Admin)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSubjectDto: UpdateSubjectDto) {
-    return this.subjectsService.update(+id, updateSubjectDto);
+    return this.subjectsService.update(id, updateSubjectDto);
   }
 
+  @UseGuards(RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.subjectsService.remove(+id);
+    return this.subjectsService.delete(id);
   }
 }

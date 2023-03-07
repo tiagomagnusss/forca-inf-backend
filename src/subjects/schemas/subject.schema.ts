@@ -6,11 +6,17 @@ export type SubjectDocument = HydratedDocument<Subject>;
 
 @Schema()
 export class Subject {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   code: string;
+
+  @Prop()
+  description: string;
+
+  @Prop({ enum: ['A', 'B', 'C', 'D', 'FF'] })
+  grade: 'A' | 'B' | 'C' | 'D' | 'FF';
 
   @Prop()
   assessments: Assessment[];

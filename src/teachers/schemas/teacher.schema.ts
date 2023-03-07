@@ -9,6 +9,12 @@ export class Teacher {
   @Prop()
   name: string;
 
+  @Prop({ enum: ['A', 'B', 'C', 'D', 'FF'] })
+  grade: 'A' | 'B' | 'C' | 'D' | 'FF';
+
+  @Prop()
+  site: string;
+
   @Prop()
   assessments: Assessment[];
 }
