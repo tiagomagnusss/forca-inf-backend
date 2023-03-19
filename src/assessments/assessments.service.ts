@@ -12,7 +12,9 @@ export class AssessmentsService {
   ) {}
 
   async create(createAssessmentDto: CreateAssessmentDto): Promise<Assessment> {
-    const createdAssessment = await this.assessmentModel.create(createAssessmentDto);
+    const createdAssessment = await this.assessmentModel.create(
+      createAssessmentDto,
+    );
     return createdAssessment;
   }
 

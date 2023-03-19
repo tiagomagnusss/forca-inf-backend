@@ -19,8 +19,8 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
-  @UseGuards(RolesGuard)
-  @Roles(Role.Admin)
+  // @UseGuards(RolesGuard)
+  // @Roles(Role.Admin)
   @Post()
   create(@Body() createSubjectDto: CreateSubjectDto) {
     return this.subjectsService.create(createSubjectDto);
