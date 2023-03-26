@@ -10,18 +10,16 @@ export class User {
   name: string;
 
   @Prop({ required: true, unique: true })
-  mail: string;
-
-  @Prop({ required: true })
-  password: string;
-
-  @Prop({ default: false, required: true })
-  confirmed: Boolean;
+  email: string;
 
   @Prop({ default: Date.now, required: true })
   createdAt: Date;
 
-  @Prop({ enum: ['teacher', 'student', 'admin'], default: 'student', required: true })
+  @Prop({
+    enum: ['teacher', 'student', 'admin'],
+    default: 'student',
+    required: true,
+  })
   role: Role;
 }
 

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Type } from 'class-transformer';
+import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
 import { Assessment } from 'src/assessments/schemas/assessment.schema';
 
 export type SubjectDocument = HydratedDocument<Subject>;
@@ -9,7 +10,7 @@ export class Subject {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   code: string;
 
   @Prop()
@@ -18,8 +19,17 @@ export class Subject {
   @Prop({ enum: ['A', 'B', 'C', 'D', 'FF'] })
   grade: 'A' | 'B' | 'C' | 'D' | 'FF';
 
-  @Prop()
+  @Prop({
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Assessment' }],
+  })
+  @Type(() => Assessment)
   assessments: Assessment[];
+
+  @Prop({ default: Date.now, required: true })
+  createdAt: Date;
+
+  @Prop({ default: Date.now, required: true })
+  updatedAt: Date;
 }
 
 export const SubjectSchema = SchemaFactory.createForClass(Subject);

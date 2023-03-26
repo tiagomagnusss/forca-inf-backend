@@ -1,4 +1,5 @@
-import { IsDate, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateAssessmentDto {
   title: string;
@@ -7,14 +8,14 @@ export class CreateAssessmentDto {
 
   semester: string;
 
-  owner: string;
+  @IsNotEmpty()
+  owner: Types.ObjectId;
 
-  subject: string;
+  @IsNotEmpty()
+  subject: Types.ObjectId;
 
-  teacher: string;
-
-  @IsDate()
-  createdAt: Date;
+  @IsNotEmpty()
+  teacher: Types.ObjectId;
 
   @IsNotEmpty()
   grade: 'A' | 'B' | 'C' | 'D' | 'FF';

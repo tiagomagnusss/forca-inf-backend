@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { Subject } from 'src/subjects/schemas/subject.schema';
+import { Type } from 'class-transformer';
+import { HydratedDocument, Types, Schema as MongooseSchema } from 'mongoose';
+import { Subject } from 'rxjs';
 import { Teacher } from 'src/teachers/schemas/teacher.schema';
 import { User } from 'src/users/schemas/user.schema';
 
@@ -17,20 +18,26 @@ export class Assessment {
   @Prop()
   semester: string;
 
-  @Prop()
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  @Type(() => User)
   owner: User;
 
-  @Prop()
-  subject: Subject;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Subject' })
+  @Type(() => Subject)
+  subject: Types.ObjectId;
 
-  @Prop()
-  teacher: Teacher;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Teacher' })
+  @Type(() => Teacher)
+  teacher: Types.ObjectId;
 
   @Prop({ default: Date.now, required: true })
   createdAt: Date;
 
+  @Prop({ default: Date.now, required: true })
+  updatedAt: Date;
+
   @Prop({ enum: ['A', 'B', 'C', 'D', 'FF'], required: true })
-  grade!: 'A' | 'B' | 'C' | 'D' | 'FF';
+  grade: 'A' | 'B' | 'C' | 'D' | 'FF';
 }
 
 export const AssessmentSchema = SchemaFactory.createForClass(Assessment);

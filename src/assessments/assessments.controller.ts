@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { Role } from 'src/roles/role.enum';
 import { Roles } from 'src/roles/roles.decorator';
@@ -8,29 +16,29 @@ import { Assessment } from './schemas/assessment.schema';
 
 @Controller('Assessments')
 export class AssessmentsController {
-  constructor(private readonly AssessmentsService: AssessmentsService) {}
+  constructor(private readonly assessmentsService: AssessmentsService) {}
 
-  @UseGuards(RolesGuard)
-  @Roles(Role.Student, Role.Admin)
+  // @UseGuards(RolesGuard)
+  // @Roles(Role.Student, Role.Admin)
   @Post()
   async create(@Body() createAssessmentDto: CreateAssessmentDto) {
-    await this.AssessmentsService.create(createAssessmentDto);
+    await this.assessmentsService.create(createAssessmentDto);
   }
 
   @Get()
   async findAll(): Promise<Assessment[]> {
-    return this.AssessmentsService.findAll();
+    return this.assessmentsService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Assessment> {
-    return this.AssessmentsService.findOne(id);
+    return this.assessmentsService.findOne(id);
   }
 
   @UseGuards(RolesGuard)
   @Roles(Role.Student, Role.Admin)
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return this.AssessmentsService.delete(id);
+    return this.assessmentsService.delete(id);
   }
 }
