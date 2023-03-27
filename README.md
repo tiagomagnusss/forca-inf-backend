@@ -46,7 +46,7 @@ $ yarn run start:prod
 - [MongoDB Atlas](https://docs.atlas.mongodb.com/)
 - [Render](https://render.com/)
 
-- ## Autores
+## Autores
 
 - [Lorenzo Lopes Cernicchiaro](https://github.com/llcernicchiaro)
 - [Giulia Giozza](https://github.com/giugiozza)
